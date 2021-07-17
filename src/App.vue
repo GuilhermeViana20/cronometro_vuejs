@@ -3,11 +3,11 @@
 
     <img class="img" alt="Vue logo" src="./assets/cronometro.png">
 
-    <a class="timer" href="">00:00,00</a>
+    <a class="timer" href="">{{numero}}</a>
 
     <div class="areaBtn">
-      <button class="botao">INICIAR</button>
-      <button class="botao">REINICIAR</button>
+      <button class="botao" @click="iniciar">{{botao}}</button>
+      <button class="botao" @click="reiniciar">REINICIAR</button>
     </div>
   </div>
 </template>
@@ -15,7 +15,58 @@
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      numero: '00:00.00',
+      botao: 'INICIAR',
+      timer: null,
+      ss: 0,
+      mm: 0,
+      hh: 0,
+    }
+  },
+  methods: {
+    iniciar() {
+      if(this.timer !== null){
+        // TIMER NÃO É NULO
+        clearInterval(this.timer);
+        this.timer = null;
+        this.botao = 'INICIAR';
+      } else {
+        // TIMER É NULO
+
+        this.timer = setInterval(()=> {
+          this.rodarTimer();
+        }, 0.1) // 1seg
+        this.botao = 'PAUSAR';
+      }
+    },
+    reiniciar() {
+      this.timer = '00:00.00';
+    },
+    rodarTimer() {
+      this.ss++;
+
+      if(this.ss == 59) {
+        // 59 Segundos
+        this.ss = 0;
+        this.mm++;
+      }
+
+      if(this.mm == 59) {
+        // 59 Minutos
+        this.mm = 0;
+        this.hh++;
+      }
+
+      let format = (this.hh < 10 ? '0'+this.hh : this.hh) + ':'
+      + (this.mm < 10 ? '0' + this.mm : this.mm) + '.'
+      + (this.ss < 10 ? '0' + this.ss : this.ss);
+
+      return this.numero = format;
+    }
+  }
 }
 </script>
 
