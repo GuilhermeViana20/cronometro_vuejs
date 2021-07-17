@@ -6,3 +6,10 @@
     * Release
         - Escopo Finalizado
         - Projeto Iniciado
+# v1.0.1
+    * Release
+        - Implementado giro do cronômetro
+# v1.0.2
+    * Release
+        - Código indentado
+        - Correção no CHANGELOG
