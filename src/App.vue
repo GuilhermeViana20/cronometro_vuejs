@@ -38,12 +38,20 @@ export default {
 
         this.timer = setInterval(()=> {
           this.rodarTimer();
-        }, 0.1) // 1seg
+        }, 100) // 1seg
         this.botao = 'PAUSAR';
       }
     },
     reiniciar() {
-      this.timer = '00:00.00';
+      if(this.timer !== null) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+      this.ss = 0;
+      this.mm = 0;
+      this.hh = 0;
+      this.numero = '00:00.00';
+      this.botao = 'INICIAR';
     },
     rodarTimer() {
       this.ss++;
